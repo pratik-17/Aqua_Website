@@ -1,0 +1,1170 @@
+/* ============================================================
+   AQUARIUS – Premium Design System v3
+   Navy/Obsidian base + Amber/Gold accents
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ── New Premium Palette ── */
+  --bg-primary: #070B14;
+  --bg-card: rgba(15, 23, 42, 0.55);
+  --bg-card-hover: rgba(15, 23, 42, 0.75);
+  --bg-card-border: rgba(148, 163, 184, 0.08);
+
+  --text-primary: #E2E8F0;
+  --text-secondary: rgba(226, 232, 240, 0.6);
+  --text-muted: rgba(226, 232, 240, 0.35);
+
+  --accent: #3B82F6;
+  /* Professional sapphire blue */
+  --accent-soft: rgba(59, 130, 246, 0.12);
+  --accent-glow: rgba(59, 130, 246, 0.3);
+  --accent-warm: #F59E0B;
+  /* Amber/gold for highlights */
+  --accent-warm-soft: rgba(245, 158, 11, 0.12);
+  --accent-warm-glow: rgba(245, 158, 11, 0.3);
+  --danger: #EF4444;
+  /* Red for shark/predator vibes */
+  --steel: #64748B;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+
+  --container-max: 1320px;
+  --gutter: clamp(1.25rem, 3vw, 3rem);
+  --section-py: clamp(5rem, 12vh, 10rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+  --glass-blur: 24px;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box
+}
+
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+  cursor: none
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+  overflow: hidden
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain
+}
+
+.lenis.lenis-stopped {
+  overflow: clip
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none
+}
+
+button {
+  cursor: none
+}
+
+::-webkit-scrollbar {
+  width: 4px
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary)
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent)
+}
+
+/* ── Preloader ── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s var(--ease-out), visibility 1s;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none
+}
+
+.preloader-text {
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--accent-warm);
+  letter-spacing: .6em;
+  text-transform: uppercase;
+  animation: preloaderPulse 2s ease-in-out infinite;
+}
+
+.preloader-bar {
+  width: 160px;
+  height: 1px;
+  background: rgba(255, 255, 255, .06);
+  margin-top: 1.5rem;
+  border-radius: 1px;
+  overflow: hidden
+}
+
+.preloader-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+  transition: width .3s var(--ease-out)
+}
+
+@keyframes preloaderPulse {
+
+  0%,
+  100% {
+    opacity: .4
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
+/* ── Canvas ── */
+#ocean-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none
+}
+
+/* ── Water Caustic CSS Overlay ── */
+.caustic-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .04;
+  background:
+    radial-gradient(ellipse 60% 40% at 25% 15%, rgba(59, 130, 246, .2), transparent),
+    radial-gradient(ellipse 50% 35% at 75% 35%, rgba(59, 130, 246, .15), transparent);
+  animation: causticShift 10s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+@keyframes causticShift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: .03
+  }
+
+  50% {
+    transform: translate(-1.5%, .8%) scale(1.01);
+    opacity: .05
+  }
+
+  100% {
+    transform: translate(.8%, -.5%) scale(.99);
+    opacity: .03
+  }
+}
+
+/* ── Film Grain ── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: .025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: grainShift .4s steps(4) infinite;
+}
+
+@keyframes grainShift {
+  0% {
+    transform: translate(0, 0)
+  }
+
+  25% {
+    transform: translate(-1%, -2%)
+  }
+
+  50% {
+    transform: translate(2%, 1%)
+  }
+
+  75% {
+    transform: translate(-1%, 2%)
+  }
+
+  100% {
+    transform: translate(0, 0)
+  }
+}
+
+/* ── Sonar Cursor ── */
+.sonar-cursor {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.sonar-cursor .crosshair {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--accent-warm);
+  border-radius: 50%;
+  opacity: .7;
+}
+
+.sonar-cursor .crosshair::before,
+.sonar-cursor .crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--accent-warm);
+}
+
+.sonar-cursor .crosshair::before {
+  width: 1px;
+  height: 6px;
+  left: 50%;
+  top: -4px;
+  transform: translateX(-50%);
+}
+
+.sonar-cursor .crosshair::after {
+  width: 6px;
+  height: 1px;
+  top: 50%;
+  left: -4px;
+  transform: translateY(-50%);
+}
+
+.sonar-cursor .dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent-warm);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Sonar ping ring */
+.sonar-ping {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9996;
+  border: 1px solid var(--accent-warm);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sonarExpand 2s var(--ease-out) forwards;
+}
+
+@keyframes sonarExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: .5
+  }
+
+  100% {
+    width: 180px;
+    height: 180px;
+    opacity: 0
+  }
+}
+
+/* ── Click Ripple ── */
+.click-ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  z-index: 9997;
+  animation: rippleExpand .7s var(--ease-out) forwards;
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: .6;
+    transform: translate(-50%, -50%)
+  }
+
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transform: translate(-50%, -50%)
+  }
+}
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter)
+}
+
+.section {
+  position: relative;
+  z-index: 3
+}
+
+/* ── Typography ── */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.08
+}
+
+h1 {
+  font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+  letter-spacing: -.03em
+}
+
+h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  letter-spacing: -.02em
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem)
+}
+
+p {
+  font-size: clamp(.95rem, 1.1vw, 1.05rem);
+  color: var(--text-secondary);
+  max-width: 55ch;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent-warm)
+}
+
+/* ── Icon Containers ── */
+.icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--accent-warm-soft);
+  border: 1px solid rgba(245, 158, 11, .08);
+  margin-bottom: 1.25rem;
+}
+
+.icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent-warm);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+/* ============================================================
+   SECTION 01 — HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  pointer-events: none;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 var(--gutter);
+}
+
+.hero-headline {
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  margin-bottom: .25em
+}
+
+.hero-headline .outline-text {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(59, 130, 246, .15));
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(.82rem, 1.2vw, 1rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-top: .5rem;
+}
+
+.hero-cta {
+  margin-top: 3rem;
+  pointer-events: all;
+  display: inline-block
+}
+
+/* ── Telemetry Cards ── */
+.telemetry-cards {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-top: 3.5rem;
+  flex-wrap: wrap;
+  pointer-events: all
+}
+
+.telemetry-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.75rem;
+  min-width: 170px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .5s var(--ease-spring), box-shadow .5s, background .5s;
+}
+
+.telemetry-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-warm), transparent);
+  opacity: .3;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.telemetry-card:hover {
+  transform: translateY(-4px);
+  background: var(--bg-card-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .3), 0 0 20px rgba(245, 158, 11, .04);
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: .15
+  }
+
+  50% {
+    opacity: .5
+  }
+}
+
+.telemetry-value {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-warm);
+  display: block
+}
+
+.telemetry-label {
+  font-size: .7rem;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: .15rem;
+  font-weight: 400
+}
+
+/* ── CTA Button ── */
+.btn-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .9rem 2.2rem;
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(245, 158, 11, .2);
+  border-radius: 50px;
+  cursor: none;
+  overflow: hidden;
+  transition: all .4s var(--ease-spring);
+  animation: breatheGlow 4s ease-in-out infinite;
+}
+
+.btn-glass:hover {
+  color: var(--bg-primary);
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+  box-shadow: 0 0 30px var(--accent-warm-glow), 0 0 60px rgba(245, 158, 11, .1);
+  transform: scale(1.04);
+}
+
+.btn-glass .btn-arrow {
+  display: inline-block;
+  transition: transform .4s var(--ease-spring)
+}
+
+.btn-glass:hover .btn-arrow {
+  transform: translateY(3px)
+}
+
+@keyframes breatheGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, .04)
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, .12)
+  }
+}
+
+.magnetic-wrap {
+  display: inline-block;
+  position: relative
+}
+
+/* ============================================================
+   SECTION 02 — APEX BIOLOGY
+   ============================================================ */
+.apex-biology {
+  padding: var(--section-py) 0
+}
+
+.apex-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 5vw, 6rem);
+  align-items: center
+}
+
+.apex-label {
+  margin-bottom: 1.25rem
+}
+
+.apex-title {
+  margin-bottom: 1.75rem;
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.apex-text {
+  margin-bottom: 1.25rem
+}
+
+.apex-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2.5rem
+}
+
+.apex-stat-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent-warm)
+}
+
+.apex-stat-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 400;
+  margin-top: .15rem
+}
+
+.apex-visual {
+  position: relative
+}
+
+.apex-image-frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(160deg, #0f172a, var(--bg-primary));
+  border: 1px solid var(--bg-card-border);
+  position: relative;
+}
+
+.apex-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, var(--bg-primary));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.apex-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.apex-decorative-ring {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 158, 11, .06);
+  right: -40px;
+  top: -40px;
+  animation: ringPulse 10s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: .15
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: .3
+  }
+}
+
+.ink-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s var(--ease-out)
+}
+
+.ink-reveal.revealed {
+  clip-path: inset(0 0% 0 0)
+}
+
+/* ============================================================
+   SECTION 03 — GENOME VAULT
+   ============================================================ */
+.genome-vault {
+  padding: var(--section-py) 0;
+  overflow: hidden
+}
+
+.genome-header {
+  text-align: center;
+  margin-bottom: 3.5rem
+}
+
+.genome-title {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--text-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.genome-description,
+.eco-description {
+  margin: .75rem auto 0;
+  text-align: center;
+  max-width: 50ch;
+}
+
+.species-gallery {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.species-gallery::-webkit-scrollbar {
+  display: none
+}
+
+.species-card {
+  flex: 0 0 300px;
+  height: 420px;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform .6s var(--ease-spring), box-shadow .6s, background .5s;
+  cursor: none;
+  scroll-snap-align: start;
+}
+
+.species-card-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, #0a1628, #060a12);
+}
+
+.species-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: .6;
+  transition: opacity .5s, transform .8s var(--ease-out);
+}
+
+.species-card:hover .species-card-image img {
+  opacity: .8;
+  transform: scale(1.05);
+}
+
+.species-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, rgba(59, 130, 246, .03), transparent 50%);
+  pointer-events: none
+}
+
+.species-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(7, 11, 20, .95), transparent);
+  pointer-events: none;
+  z-index: 1
+}
+
+.species-card:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .4), 0 0 30px rgba(59, 130, 246, .05)
+}
+
+.species-card.active {
+  border-color: rgba(245, 158, 11, .25)
+}
+
+.species-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--accent-warm-soft);
+  border: 1px solid rgba(245, 158, 11, .1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .75rem;
+}
+
+.species-icon-wrap svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-warm);
+  fill: none;
+  stroke-width: 1.5
+}
+
+.species-info {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+  text-align: left;
+}
+
+.species-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary)
+}
+
+.species-latin {
+  font-style: italic;
+  font-size: .8rem;
+  color: var(--accent);
+  margin-top: .15rem;
+  font-weight: 400
+}
+
+.species-detail {
+  font-size: .82rem;
+  color: var(--text-secondary);
+  margin-top: .6rem;
+  line-height: 1.55
+}
+
+.species-tag {
+  display: inline-block;
+  padding: .2rem .65rem;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  border: 1px solid rgba(245, 158, 11, .15);
+  border-radius: 20px;
+  margin-top: .65rem;
+}
+
+/* ============================================================
+   SECTION 04 — ECOLOGICAL RESONANCE
+   ============================================================ */
+.eco-resonance {
+  padding: var(--section-py) 0;
+  position: relative
+}
+
+.eco-header {
+  text-align: center;
+  margin-bottom: 3.5rem
+}
+
+.eco-title {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.eco-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem
+}
+
+.eco-card {
+  background: rgba(15, 23, 42, .3);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, .04);
+  box-shadow: 8px 8px 24px rgba(0, 0, 0, .35), -3px -3px 12px rgba(15, 23, 42, .1);
+  transition: transform .5s var(--ease-spring), box-shadow .5s, background .5s;
+}
+
+.eco-card:hover {
+  transform: translateY(-4px);
+  background: rgba(15, 23, 42, .45);
+  box-shadow: 12px 12px 32px rgba(0, 0, 0, .45), 0 0 20px rgba(59, 130, 246, .03)
+}
+
+.eco-card-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: .35rem;
+  margin-top: .5rem
+}
+
+.eco-card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: .6rem
+}
+
+.eco-card-text {
+  font-size: .85rem;
+  color: var(--text-secondary);
+  line-height: 1.65
+}
+
+#jellyfish-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .3
+}
+
+.eco-resonance .container {
+  position: relative;
+  z-index: 2
+}
+
+/* ============================================================
+   SECTION 05 — FOOTER
+   ============================================================ */
+.benthic-zone {
+  position: relative;
+  padding: 8rem 0 3rem;
+  overflow: hidden;
+  z-index: 3
+}
+
+.benthic-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 250px;
+  pointer-events: none;
+  z-index: 0
+}
+
+.benthic-floor svg {
+  width: 100%;
+  height: 100%
+}
+
+.coral-glow {
+  animation: coralShimmer 6s ease-in-out infinite alternate
+}
+
+@keyframes coralShimmer {
+  0% {
+    opacity: .08;
+    filter: brightness(.8)
+  }
+
+  100% {
+    opacity: .2;
+    filter: brightness(1.2)
+  }
+}
+
+.benthic-content {
+  position: relative;
+  z-index: 2;
+  text-align: center
+}
+
+.benthic-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  background: linear-gradient(135deg, var(--accent-warm), var(--text-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.benthic-tagline {
+  font-size: .9rem;
+  color: var(--text-muted);
+  margin: 0 auto 2.5rem;
+  max-width: 40ch
+}
+
+.benthic-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem
+}
+
+.benthic-link {
+  color: var(--text-muted);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .4rem .8rem;
+  border-radius: var(--radius-sm);
+  transition: color .3s, background .3s;
+}
+
+.benthic-link:hover {
+  color: var(--accent-warm);
+  background: rgba(255, 255, 255, .03)
+}
+
+.benthic-divider {
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1e293b, transparent);
+  margin: 0 auto 1.5rem
+}
+
+.benthic-credit {
+  font-size: .68rem;
+  color: rgba(255, 255, 255, .12);
+  letter-spacing: .2em;
+  text-transform: uppercase
+}
+
+.benthic-credit span {
+  color: var(--accent-warm)
+}
+
+/* ── Utilities ── */
+.opacity-0 {
+  opacity: 0
+}
+
+.translate-up {
+  transform: translateY(30px)
+}
+
+/* ── Responsive ── */
+@media(max-width:1024px) {
+  .apex-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem
+  }
+
+  .species-card {
+    flex: 0 0 270px;
+    height: 400px
+  }
+}
+
+@media(max-width:768px) {
+  .telemetry-cards {
+    flex-direction: column;
+    align-items: center
+  }
+
+  .telemetry-card {
+    min-width: 220px
+  }
+
+  .apex-stats {
+    flex-direction: column;
+    gap: 1.25rem
+  }
+
+  .eco-cards {
+    grid-template-columns: 1fr
+  }
+
+  .benthic-links {
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem
+  }
+
+  .species-card {
+    flex: 0 0 250px;
+    height: 380px
+  }
+}
+
+@media(max-width:480px) {
+  h1 {
+    font-size: clamp(2.2rem, 11vw, 3.5rem)
+  }
+
+  .btn-glass {
+    padding: .8rem 1.6rem;
+    font-size: .72rem
+  }
+}
