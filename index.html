@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQUARIUS — The World of Sharks & Marine Intelligence</title>
+  <meta name="description"
+    content="Dive into the abyss. Explore the world of sharks through an immersive 3D cinematic web experience.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦈</text></svg>">
+</head>
+
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-text">Descending</div>
+    <div class="preloader-bar">
+      <div class="preloader-bar-fill" id="preloader-fill"></div>
+    </div>
+  </div>
+
+  <!-- THREE.JS CANVAS -->
+  <canvas id="ocean-canvas"></canvas>
+
+  <!-- CAUSTIC OVERLAY -->
+  <div class="caustic-overlay"></div>
+
+  <!-- NOISE GRAIN -->
+  <div class="noise-overlay"></div>
+
+  <!-- SONAR CURSOR -->
+  <div class="sonar-cursor" id="sonar-cursor">
+    <div class="crosshair"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="smooth-wrapper">
+
+    <!-- HERO -->
+    <section class="section hero" id="hero">
+      <div class="hero-content">
+        <p class="label hero-label opacity-0 translate-up">Aquarius · Marine Intelligence</p>
+        <h1 class="hero-headline opacity-0">
+          DIVE INTO<br><span class="outline-text">INTELLIGENCE</span>
+        </h1>
+        <p class="hero-subtitle opacity-0 translate-up">Explore 450 million years of apex evolution</p>
+
+        <div class="hero-cta opacity-0 translate-up">
+          <div class="magnetic-wrap">
+            <a href="#apex-biology" class="btn-glass" id="cta-descent">
+              Initiate Descent <span class="btn-arrow">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="telemetry-cards">
+          <div class="telemetry-card opacity-0 translate-up">
+            <span class="telemetry-value" data-count="400">0</span>
+            <span class="telemetry-label">Million Years of Evolution</span>
+          </div>
+          <div class="telemetry-card opacity-0 translate-up">
+            <span class="telemetry-value" data-count="500">0</span>
+            <span class="telemetry-label">Known Species</span>
+          </div>
+          <div class="telemetry-card opacity-0 translate-up">
+            <span class="telemetry-value" data-count="70">0</span>
+            <span class="telemetry-label">Max Speed km/h</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APEX BIOLOGY -->
+    <section class="section apex-biology" id="apex-biology">
+      <div class="container">
+        <div class="apex-grid">
+          <div class="apex-info">
+            <p class="label apex-label ink-reveal">About the Apex</p>
+            <h2 class="apex-title ink-reveal">Built for<br>Dominance</h2>
+            <p class="apex-text ink-reveal">Sharks are the ocean's most refined predators — a lineage older than trees,
+              older than dinosaurs. Every aspect of their biology is honed by 450 million years of relentless natural
+              selection.</p>
+            <p class="apex-text ink-reveal">Their electroreception can detect a heartbeat from meters away. Their skin
+              is composed of dermal denticles — tooth-like scales that reduce drag and silence their approach.</p>
+            <div class="apex-stats ink-reveal">
+              <div class="apex-stat">
+                <div class="apex-stat-value" data-count="3000">0</div>
+                <div class="apex-stat-label">Teeth in Rotation</div>
+              </div>
+              <div class="apex-stat">
+                <div class="apex-stat-value" data-count="450">0</div>
+                <div class="apex-stat-label">Million Year Lineage</div>
+              </div>
+              <div class="apex-stat">
+                <div class="apex-stat-value" data-count="8">0</div>
+                <div class="apex-stat-label">Sensory Systems</div>
+              </div>
+            </div>
+          </div>
+          <div class="apex-visual">
+            <div class="apex-image-frame" id="apex-visual-frame">
+              <img src="images/shark-portrait.png" alt="Great White Shark close-up portrait" class="apex-image"
+                loading="lazy">
+              <div class="apex-decorative-ring"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENOME VAULT -->
+    <section class="section genome-vault" id="genome-vault">
+      <div class="container">
+        <div class="genome-header">
+          <p class="label opacity-0 translate-up">The Genome Vault</p>
+          <h2 class="genome-title opacity-0 translate-up">Species<br>Intelligence</h2>
+          <p class="genome-description opacity-0 translate-up">Navigate the evolutionary database. Each species is a
+            unique branch of marine perfection.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="species-gallery" id="species-gallery">
+
+          <div class="species-card" data-species="great-white">
+            <div class="species-card-image"><img src="images/great-white.png" alt="Great White Shark" loading="lazy">
+            </div>
+            <div class="species-info">
+              <h3 class="species-name">Great White</h3>
+              <p class="species-latin">Carcharodon carcharias</p>
+              <p class="species-detail">The apex of apex predators. Up to 6m long with 300 serrated teeth designed for
+                devastating precision.</p>
+              <span class="species-tag">Apex Predator</span>
+            </div>
+          </div>
+
+          <div class="species-card" data-species="hammerhead">
+            <div class="species-card-image"><img src="images/hammerhead.png" alt="Hammerhead Shark" loading="lazy">
+            </div>
+            <div class="species-info">
+              <h3 class="species-name">Hammerhead</h3>
+              <p class="species-latin">Sphyrna mokarran</p>
+              <p class="species-detail">360° binocular vision. The cephalofoil is the most advanced electroreceptive
+                organ in the animal kingdom.</p>
+              <span class="species-tag">Sensory Master</span>
+            </div>
+          </div>
+
+          <div class="species-card" data-species="whale-shark">
+            <div class="species-card-image"><img src="images/whale-shark.png" alt="Whale Shark" loading="lazy"></div>
+            <div class="species-info">
+              <h3 class="species-name">Whale Shark</h3>
+              <p class="species-latin">Rhincodon typus</p>
+              <p class="species-detail">The gentle giant. Up to 12m long, filter-feeding on plankton. The largest fish
+                in the ocean.</p>
+              <span class="species-tag">Gentle Giant</span>
+            </div>
+          </div>
+
+          <div class="species-card" data-species="mako">
+            <div class="species-card-image"><img src="images/mako.png" alt="Shortfin Mako Shark" loading="lazy"></div>
+            <div class="species-info">
+              <h3 class="species-name">Shortfin Mako</h3>
+              <p class="species-latin">Isurus oxyrinchus</p>
+              <p class="species-detail">The fastest shark alive. Bursts of 74 km/h make it the cheetah of the deep
+                ocean.</p>
+              <span class="species-tag">Speed Demon</span>
+            </div>
+          </div>
+
+          <div class="species-card" data-species="tiger">
+            <div class="species-card-image"><img src="images/tiger.png" alt="Tiger Shark" loading="lazy"></div>
+            <div class="species-info">
+              <h3 class="species-name">Tiger Shark</h3>
+              <p class="species-latin">Galeocerdo cuvier</p>
+              <p class="species-detail">The ocean's garbage disposal. Unique serrated teeth cut through turtle shells
+                and steel.</p>
+              <span class="species-tag">Versatile Hunter</span>
+            </div>
+          </div>
+
+          <div class="species-card" data-species="thresher">
+            <div class="species-card-image"><img src="images/thresher.png" alt="Thresher Shark" loading="lazy"></div>
+            <div class="species-info">
+              <h3 class="species-name">Thresher Shark</h3>
+              <p class="species-latin">Alopias vulpinus</p>
+              <p class="species-detail">Weaponized tail. Uses its elongated caudal fin like a whip to stun prey at
+                supersonic speed.</p>
+              <span class="species-tag">Tail Striker</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ECOLOGICAL RESONANCE -->
+    <section class="section eco-resonance" id="eco-resonance">
+      <canvas id="jellyfish-canvas"></canvas>
+      <div class="container">
+        <div class="eco-header">
+          <p class="label opacity-0 translate-up">Ecological Resonance</p>
+          <h2 class="eco-title opacity-0 translate-up">Guardians of<br>the Deep</h2>
+          <p class="eco-description opacity-0 translate-up">Without sharks the entire marine ecosystem collapses.</p>
+        </div>
+        <div class="eco-cards">
+          <div class="eco-card opacity-0 translate-up">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24">
+                <path d="M2 12c0 3.5 3.5 6 5 8 1.5-2 5-4.5 5-8a5 5 0 1 0-10 0z" />
+                <path d="M12 12c0 3.5 3.5 6 5 8 1.5-2 5-4.5 5-8a5 5 0 1 0-10 0z" />
+              </svg></div>
+            <div class="eco-card-value" data-count="100">0</div>
+            <h3 class="eco-card-title">Million Sharks Killed Yearly</h3>
+            <p class="eco-card-text">Industrial fishing and finning eliminate over 100 million sharks annually.</p>
+          </div>
+          <div class="eco-card opacity-0 translate-up">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg></div>
+            <div class="eco-card-value" data-count="37">0</div>
+            <h3 class="eco-card-title">Percent Threatened Species</h3>
+            <p class="eco-card-text">Over a third of all shark species are threatened with extinction by the IUCN Red
+              List.</p>
+          </div>
+          <div class="eco-card opacity-0 translate-up">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg></div>
+            <div class="eco-card-value" data-count="450">0</div>
+            <h3 class="eco-card-title">Million Years at Risk</h3>
+            <p class="eco-card-text">450 million years of evolutionary perfection could be undone in a single century.
+            </p>
+          </div>
+          <div class="eco-card opacity-0 translate-up">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg></div>
+            <div class="eco-card-value" data-count="71">0</div>
+            <h3 class="eco-card-title">Percent Ocean Coverage</h3>
+            <p class="eco-card-text">The ocean covers 71% of our planet. Sharks regulate this vast ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="section benthic-zone" id="benthic-zone">
+      <div class="benthic-floor">
+        <svg viewBox="0 0 1440 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="coral-glow" fill="rgba(245,158,11,0.04)">
+            <path
+              d="M0,250 L0,200 Q20,180 30,160 Q35,140 25,120 Q30,110 40,120 Q50,100 60,120 Q70,130 80,140 Q90,150 100,170 Q110,180 120,200 L120,250 Z" />
+            <path
+              d="M200,250 L200,210 Q210,190 220,170 Q225,150 215,130 Q225,120 235,140 Q240,160 250,180 L260,250 Z" />
+            <path d="M380,250 L380,220 Q385,200 390,210 Q395,190 400,200 Q405,195 410,210 L420,250 Z" />
+            <ellipse cx="550" cy="235" rx="45" ry="25" />
+            <path d="M700,250 L700,170 Q705,150 710,160 Q715,140 710,120 Q715,130 720,150 L730,250 Z" />
+            <path
+              d="M850,250 L850,200 Q860,180 870,160 Q880,145 875,130 Q885,125 890,140 Q900,155 910,175 Q920,190 930,210 L940,250 Z" />
+            <path d="M1050,250 L1050,225 Q1060,210 1070,220 Q1075,205 1080,215 L1090,250 Z" />
+            <path
+              d="M1200,250 L1200,185 Q1210,165 1220,150 Q1230,135 1225,120 Q1235,125 1240,140 Q1250,155 1260,175 L1270,250 Z" />
+            <path d="M1370,250 L1370,210 Q1380,195 1390,205 Q1400,190 1410,200 Q1420,210 1440,220 L1440,250 Z" />
+          </g>
+          <rect x="0" y="240" width="1440" height="10" rx="2" fill="rgba(245,158,11,0.015)" />
+        </svg>
+      </div>
+      <div class="container benthic-content">
+        <h2 class="benthic-title">AQUARIUS</h2>
+        <p class="benthic-tagline">The deep never forgets. Neither should we.</p>
+        <nav class="benthic-links">
+          <a href="#hero" class="benthic-link">Surface</a>
+          <a href="#apex-biology" class="benthic-link">Biology</a>
+          <a href="#genome-vault" class="benthic-link">Species</a>
+          <a href="#eco-resonance" class="benthic-link">Conservation</a>
+        </nav>
+        <div class="benthic-divider"></div>
+        <p class="benthic-credit">Crafted in the Abyss · <span>AQUARIUS</span> © 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/ocean.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
